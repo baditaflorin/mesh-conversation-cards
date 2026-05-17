@@ -49,3 +49,126 @@ body,
   opacity: 0.6;
   font-variant-numeric: tabular-nums;
 }
+
+.cc-screen {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.cc-screen h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--mesh-accent);
+}
+.cc-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cc-name {
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--mesh-fg);
+  font-size: 1rem;
+}
+.cc-status {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.cc-setup,
+.cc-play {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  animation: cc-fade 240ms ease-out;
+}
+.cc-draft {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--mesh-fg);
+  font: inherit;
+  resize: vertical;
+}
+.cc-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.cc-row button {
+  padding: 0.55rem 0.95rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(216, 120, 255, 0.18);
+  color: var(--mesh-fg);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.cc-row button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.cc-start {
+  background: var(--mesh-accent) !important;
+  color: #1a0a23 !important;
+  font-weight: 600;
+}
+.cc-card {
+  padding: 2rem 1.5rem;
+  border-radius: 14px;
+  background: linear-gradient(140deg, rgba(216, 120, 255, 0.22), rgba(216, 120, 255, 0.07));
+  border: 1px solid rgba(216, 120, 255, 0.35);
+  text-align: center;
+  animation: cc-fade 320ms ease-out;
+}
+.cc-card-text {
+  font-size: 1.35rem;
+  margin: 0 0 0.75rem;
+  line-height: 1.35;
+}
+.cc-card-author {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+.cc-responder {
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 0;
+}
+.cc-hint {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  margin: 0;
+}
+.cc-history {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+.cc-history li {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+}
+@keyframes cc-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
