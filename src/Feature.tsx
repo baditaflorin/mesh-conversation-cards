@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  MeshNameInput,
   createClockSync,
   useEventLog,
   useFairRng,
@@ -106,13 +107,12 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
     <div className="cc-screen">
       <header className="cc-header">
         <h1>conversation cards</h1>
-        <input
+        <MeshNameInput
           className="cc-name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={setName}
           placeholder="your name"
           maxLength={32}
-          aria-label="your name"
         />
         <p className="cc-status">
           {Object.keys(names).length} named · {cards.size} cards · round {roundN + 1}
