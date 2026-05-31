@@ -1,7 +1,7 @@
 # mesh-conversation-cards
 
 [![pages](https://img.shields.io/badge/live-baditaflorin.github.io%2Fmesh-conversation-cards-d878ff)](https://baditaflorin.github.io/mesh-conversation-cards/)
-[![version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/baditaflorin/mesh-conversation-cards/blob/main/package.json)
+[![version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/baditaflorin/mesh-conversation-cards/blob/main/package.json)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
 > Random prompt-cards rotate the room. Fair-RNG draw, slot-based responder.
