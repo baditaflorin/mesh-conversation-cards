@@ -7,6 +7,7 @@ import {
   useMeshSlot,
   useNamedPeer,
   usePhase,
+  useRoster,
   type MeshConfig,
   type YRoom,
 } from "@baditaflorin/mesh-common";
@@ -43,7 +44,13 @@ export function Feature({ room, config }: Props) {
 function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
   const { name, setName, names, nameOf } = useNamedPeer(config, room);
   const cards = useEventLog<Card>(room, "cards");
-  const fairRng = useFairRng(room, "cc-salts");
+  // A session represents a participant here (including the two-tab starter
+  // flow), so every live session contributes entropy to the fair draw.
+  const roster = useRoster(room, { dedupeByDevice: false });
+  const fairRng = useFairRng(room, "cc-salts", {
+    peerIds: roster.present,
+    minContributors: 1,
+  });
   const phase = usePhase<"setup" | "playing">(room, "phase", "setup");
   const clock = useMemo(() => (room ? createClockSync(room.provider) : null), [room]);
   useEffect(() => () => clock?.destroy(), [clock]);
@@ -63,7 +70,9 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
   const roundN = state.get("round") ?? 0;
   const shuffled = fairRng.shuffle(cards.events);
   const currentCard = shuffled.length === 0 ? null : (shuffled[roundN % shuffled.length] ?? null);
-  const present = Object.entries(names).sort(([a], [b]) => (a < b ? -1 : 1));
+  const present = roster.present
+    .filter((peerId) => Boolean(names[peerId]))
+    .map((peerId) => [peerId, names[peerId]!] as const);
   const order = fairRng.shuffle(present);
   const currentResponderId = order.length ? (order[slot.slotId % order.length]?.[0] ?? null) : null;
   const responderName = currentResponderId ? (nameOf(currentResponderId) ?? "…") : "…";
@@ -115,7 +124,7 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
           maxLength={32}
         />
         <p className="cc-status">
-          {Object.keys(names).length} named · {cards.size} cards · round {roundN + 1}
+          {present.length} named · {cards.size} cards · round {roundN + 1}
         </p>
       </header>
 
